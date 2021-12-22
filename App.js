@@ -90,21 +90,16 @@ export default function App() {
       justifyContent: 'center',
     },
   });
-  if (!fontsLoaded) {
-    // console.log('L87, fonts not found');
-    return (
-      <AppLoading />
-    );
-  } else {
-    return (
-      <BiteShareContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={theme}>
-          <HostQR />
-          <DummyComponent />
-        </ThemeProvider>
-
-      </BiteShareContext.Provider>
-    );
-  }
+  return (
+     <BiteShareContext.Provider value={{ state, dispatch }}>
+       {! fontsLoaded
+         ? <AppLoading />
+         : (<ThemeProvider theme={theme}>
+             <HostQR />
+             <DummyComponent />
+         </ThemeProvider>)
+       }
+     </BiteShareContext.Provider>
+  )
 
 }
